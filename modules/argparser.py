@@ -4,7 +4,7 @@ import argparse
 
 # PIPELINE FUNCTIONS
 def argument_parser():
-    """Summary: function argparser
+    """Summary: function argparser. Example line code to use in cmd: python3 main_script.py -p 'calculate' -s 'bicimad' -r <school_name>
 
     Returns:
         args (argparser object): argument parser
@@ -41,3 +41,4 @@ def argument_parser():
 
 #out = argument_parser()
 #print(out)
+#python3 main_script.py -p 'import' -s 'bicimad' -r 'Colegio1'
