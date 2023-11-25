@@ -57,9 +57,9 @@ def extract_dict2df(df):
             # Extract the keys from the first dictionary found. Use '.at' to get a single value from the DataFrame.
             keys = list(df.at[0, col_name].keys())
  
-            # Iterar sobre las claves y agregar nuevas columnas al DataFrame
+            # Iterate over keys and add new columns to the DataFrame
             for key in keys:
-                new_col_name = f"{col_name}_{key}"  # Nombre de la nueva columna
+                new_col_name = f"{col_name}_{key}"  # Name of new column
                 df[new_col_name] = df[col_name].apply(lambda x: x.get(key))
 
             # Delete the previous column with the dictionaries inside each cell

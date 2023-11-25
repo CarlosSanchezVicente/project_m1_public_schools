@@ -1,11 +1,38 @@
 # IMPORTS LIBRARIES
 import pandas as pd
 import requests
-import os
 from dotenv import dotenv_values
 
 
 # AUXILIARY FUNCTIONS
+def write_env(key, value):
+    """Summary: function to store the new access token in the '.env' file
+
+    Args:
+        key (string: name of variable to store
+        value (string): value of variable
+    """
+    # Extract the current variables included in the '.env' file. For that, open the file in read mode.
+    with open('.env', 'r') as f:
+        lines = f.readlines()
+
+    # Find the variable stored in key. If the key is in variables stored, replaces the old to new value in 'lines'. If not 
+    # exist this variable, create it. Iterates over the lines of the file and extract both the index and the content of 
+    # each line.
+    for i, line in enumerate(lines):  
+        if line.startswith(f'{key}='):
+            lines[i] = f'{key}={value}\n' 
+            break
+    # If the for loop ends and no 'break' has been found, it accesses the else. This means that the variable will be created 
+    # because it doesn't exist in the .env file.
+    else:
+        lines.append(f'{key}={value}\n')
+
+    # Replace or create the current key,value pair in '.env' file. For that, open the file in writte mode.
+    with open('.env', 'w') as f:
+        f.writelines(lines)
+
+
 def login_emt(BASE_URL):
     """Summary: function to do login in emt mobility web
 
@@ -29,9 +56,9 @@ def login_emt(BASE_URL):
     response_emt_login = response_emt_login.json()   # Transform the data to json.
     
     # If the response code is '00' means that the login operation is correct.
-    if response_emt_login['code'] == '00':
+    if (response_emt_login['code'] == '00') or (response_emt_login['code'] == '01'):
         accessToken = response_emt_login['data'][0]['accessToken']   # Extract the accessToken from the json.
-        os.putenv("ACCESS_TOKEN", accessToken)   # Store the token in '.env' file
+        write_env("ACCESS_TOKEN", accessToken)   # Store the token in '.env' file using the function 'write_env' defined below
         return accessToken
     else:
         # If the communication isn't possible, print this error.
@@ -64,6 +91,14 @@ def extract_bicimad_data_emt(BASE_URL, accessToken):
 
 
 def process_json(json_data):
+    """Summary: function to extract the data from the json and store them in a new dataframe
+
+    Args:
+        json_data (dictionary): json data extracted from the web
+
+    Returns:
+        df (dataframe): dataframe with the data
+    """
     # The dictionary has two keys: '@context' and '@graph'. And the interesting data are in the value of the second key where
     # other dictionaries are included. Extract both keys in a list called 'keys' -> json_data["@graph"] = json_data[keys[1]].
     keys=list(json_data.keys())
@@ -110,7 +145,7 @@ def import_update_json():
         print('The token stored is expired. The program will be login again and create new access token')
         accessToken = login_emt(BASE_URL)
         # Execute the function to extract the updated bicimad data again with the new token.
-        json__response_data =  extract_bicimad_data_emt(BASE_URL, accessToken)
+        json__response =  extract_bicimad_data_emt(BASE_URL, accessToken)
     
     json_data = json__response['data'][0]   # Extract the bicimad data from the json.
     df = process_json(json_data)
