@@ -14,6 +14,12 @@ public_school_url = 'https://datos.madrid.es/egob/catalogo/202311-0-colegios-pub
 
 # MAIN FUNCTION
 def main():
+    """Summary: Function to execute the pipeline to extract, process and return the results of this application. 
+
+    Returns:
+        dataframe: dataframe with the result. This can be the complete dataframe or only the one corresponding to one of the schools, which 
+        has been previously selected by the user.
+    """
     # Read the output of argparser related to how the user wants to obtain the processed data 
     out_argp = arg.argument_parser()
     print()

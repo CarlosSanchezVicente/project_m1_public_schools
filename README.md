@@ -84,5 +84,4 @@ This is the final project of module 1 for the Ironhack Part Time Data Analytics 
 https://github.com/ih-datapt-mad/ih_datamadpt0923_project_m1
 
 ### 📨 Contact info
-
 If you have some question, drop me a line! (sanchezvicentecarlos@gmail.com).

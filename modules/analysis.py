@@ -6,15 +6,37 @@ from shapely.geometry import Point
 
 # AUXILIARY FUNCTIONS
 def to_mercator(lat, long):
-    # transform latitude/longitude data in degrees to pseudo-mercator coordinates in metres
+    """Summary: transform latitude/longitude data in degrees to pseudo-mercator coordinates in metres
+
+    Args:
+        lat (float): latitude
+        long (float): longitude 
+
+    Returns:
+        c (panda serie): pseudo-mercator coordinates in metres
+    """
     c = gpd.GeoSeries([Point(lat, long)], crs=4326)
     c = c.to_crs(3857)
     return c
 
+out = to_mercator(40.488, -3.65)
+print('----------------> Esta es la salida', out)
+print(type(out))
 
 def distance_meters(lat_start, long_start, lat_finish, long_finish):
-    # return the distance in metres between to latitude/longitude pair points in degrees 
-    # (e.g.: Start Point -> 40.4400607 / -3.6425358 End Point -> 40.4234825 / -3.6292625)
+    """summary: return the distance in metres between to latitude/longitude pair points in degrees 
+                (e.g.: Start Point -> 40.4400607 / -3.6425358 End Point -> 40.4234825 / -3.6292625)
+
+    Args:
+        lat_start (integer): latitude of starting point
+        long_start (integer): longitude of starting point
+        lat_finish (integer): latitude of the end point
+        long_finish (integer): longitude of the end point
+
+    Returns:
+        distance (integer): distance beetween two points
+    """
+    # 
     start = to_mercator(lat_start, long_start)
     finish = to_mercator(lat_finish, long_finish)
     return start.distance(finish)

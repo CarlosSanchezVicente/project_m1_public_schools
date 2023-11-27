@@ -39,6 +39,4 @@ def argument_parser():
     args = parser.parse_args()
     return args
 
-#out = argument_parser()
-#print(out)
-#python3 main_script.py -p 'import' -s 'bicimad' -r 'Colegio1'
+
