@@ -23,7 +23,7 @@ In the 'main_script' file you can see at a high level how the pipeline works. In
 <img src="./img/modules_structure.PNG" alt="EMT Logo" width="500" align="center"> 
 </p>
   
-From the 'main_script' the functions found in the modules argparser, update_data and reporting are used. From these three modules, the functions stored in acquisition, wranling and analysis are used.
+From the 'main' the functions found in the modules argparser, update_data and reporting are used. From these three modules, the functions stored in acquisition, wranling and analysis are used.
 It should be noted that in each of the modules, the functions included in each of them are organized as auxiliary functions and pipeline functions. The latter are the functions used during the pipeline or in other modules. While the auxiliary functions are functions used in that same module.
 
 Usage
@@ -33,7 +33,7 @@ At the execution of pipeline with main_script.py, the user must input through 'a
 - Option 3: display the complete table or for a single public school.
 In this sniped the code you can see an example (you can see more information in the module 'argparser'):
 ```
-python main_script.py -p 'import' -s 'bicimad' -r __school_name__
+python main.py -p 'import' -s 'bicimad' -r __school_name__
 ```
 The data stored in the 'processed' folder are the bicimad/bicipark datasets already extracted and cleaned. On the other hand, as mentioned above, the complete dataframe with all calculated distances is saved.
 The requested result will be displayed on the screen and in case you want to view the entire table it will be saved in a csv file in the folder: data -> result.
@@ -56,7 +56,7 @@ The requested result will be displayed on the screen and in case you want to vie
     ├── project
     ├── .gitignore
     ├── README.md
-    ├── main_script.py
+    ├── main.py
     ├── LICENSE
     ├── img
     ├── modules
