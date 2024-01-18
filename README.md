@@ -18,7 +18,7 @@ There are two main sources of information, csv and data from api rest:
 
 
 ### 🚀 Pipeline
-In the 'main_script' file you can see at a high level how the pipeline works. In addition, the different options that are made depending on the options chosen by the user using argparser are included.
+In the 'main.py' file you can see at a high level how the pipeline works. In addition, the different options that are made depending on the options chosen by the user using argparser are included.
 <p align="center">
 <img src="./img/modules_structure.PNG" alt="EMT Logo" width="500" align="center"> 
 </p>
